@@ -1,0 +1,14 @@
+[
+  {"name": "Minhyung", "number": "010-0000-0000", "address":  "서울시 성동구 62-22"},
+  {"name": "Jungwoo", "number": "010-1111-1111", "address":  "서울시 성북구 32-11"},
+  {"name": "Youngho", "number": "010-2222-2222", "address":  "서울시 서초구 29-5"},
+  {"name": "Taeyong", "number": "010-3333-3333", "address":  "서울시 관악구 89-2"},
+  {"name": "Haechan", "number": "010-4444-4444", "address":  "서울시 강남구 56-3"},
+  {"name": "Taeil", "number": "010-5555-5555", "address":  "서울시 강서구 23-4"},
+  {"name": "Doyoung", "number": "010-6666-6666", "address":  "서울시 종로구 34-4"},
+  {"name": "Jaehyun", "number": "010-7777-7777", "address":  "대전광역시 유성구 29-45"},
+  {"name": "Jisung", "number": "010-8888-8888", "address":  "대전광역시 대덕구 16-34"},
+  {"name": "Jaemin", "number": "010-9999-9999", "address":  "대전광역시 동구 33-4"},
+  {"name": "Jeno", "number": "010-0101-0101", "address":  "대전광역시 서구 25-5"},
+  {"name": "Chenle", "number": "010-1212-1212", "address":  "대전광역시 서구 34-5"}
+]

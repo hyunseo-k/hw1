@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,22 +12,22 @@
         android:orientation="vertical"
         android:padding="20dp"
         >
+
         <ImageView
             android:id="@+id/gallary_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background">
-        </ImageView>
+            android:src="@drawable/ic_launcher_background"
+            tools:srcCompat="@tools:sample/avatars"></ImageView>
+
         <TextView
             android:id="@+id/gallary_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="example"
-            android:textSize="20sp"
-            android:textAlignment="center"
             android:layout_gravity="center_horizontal"
-            >
-        </TextView>
+            android:textAlignment="center"
+            android:textSize="20sp"
+            tools:text="example"></TextView>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

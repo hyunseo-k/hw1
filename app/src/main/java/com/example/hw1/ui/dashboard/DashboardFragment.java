@@ -5,12 +5,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.hw1.R;
 import com.example.hw1.databinding.FragmentDashboardBinding;
@@ -20,9 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
@@ -32,7 +30,7 @@ public class DashboardFragment extends Fragment {
     private ArrayList<MyData> dataList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-        ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
 //        //DashboardViewModel dashboardViewModel =
 //        //new ViewModelProvider(this).get(DashboardViewModel.class);
 //
@@ -55,6 +53,15 @@ public class DashboardFragment extends Fragment {
 
         myGallaryAdapter = new MyGallaryAdapter(this.getContext(), dataList);
         listView.setAdapter(myGallaryAdapter);
+
+        // 임시 코드 : 클릭하면 글자 띄우기
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast toast = Toast.makeText(getActivity(), "클릭되었습니다", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
 
         return root;
 
@@ -95,7 +102,6 @@ public class DashboardFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }

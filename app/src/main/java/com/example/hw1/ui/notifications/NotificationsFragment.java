@@ -1,6 +1,7 @@
 package com.example.hw1.ui.notifications;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hw1.Cocktail;
 import com.example.hw1.R;
 import com.example.hw1.databinding.FragmentNotificationsBinding;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class NotificationsFragment extends Fragment {
 
@@ -32,17 +43,113 @@ public class NotificationsFragment extends Fragment {
         Button buttonSearch = (Button) root.findViewById(R.id.buttonSearch);
         Button buttonRandom = (Button) root.findViewById(R.id.buttonRandom);
 
+        ArrayList<Cocktail> cocktails = new ArrayList<Cocktail>();
 
 
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 버튼이 눌렸으니 API 호출을 날리자.
+                String searchQuery = cocktailSearch.getText().toString();
+                String cocktailAPIKey = getString(R.string.COCKTAIL_API_KEY);
+                String queryURL = "https://www.thecocktaildb.com/api/json/v1/" + cocktailAPIKey + "/search.php?s=" + searchQuery;
 
+                OkHttpClient client = new OkHttpClient();
 
+                //HttpUrl.Builder urlBuilder = HttpUrl.parse(queryURL).newBuilder();
+                //urlBuilder.addQueryParameter("page", "2");
 
-        return root;
+                Request req = new Request.Builder().url(queryURL).build();
+
+                client.newCall(req).enqueue(new Callback() {
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        final String myResponse = response.body().string();
+
+                        if (getActivity() != null) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // 여기에 코드를 입력하세요
+                                    Log.d("hello", myResponse);
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+//                String searchQuery = cocktailSearch.getText().toString();
+//                String cocktailAPIKey = getString(R.string.COCKTAIL_API_KEY);
+//                String queryURL = "https://www.thecocktaildb.com/api/json/v1/" + cocktailAPIKey + "/search.php?s=" + searchQuery;
+//
+//                //Toast toast = Toast.makeText(getContext(), "러니ㅓ일알", Toast.LENGTH_SHORT);
+//                //toast.show();
+//
+//
+//                try {
+//                    URL url = new URL(queryURL);
+//
+//                    InputStream is = url.openStream();
+//                    InputStreamReader isr = new InputStreamReader(is);
+//                    BufferedReader reader = new BufferedReader(isr);
+//
+//                    StringBuffer buffer = new StringBuffer();
+//                    String line = reader.readLine();
+//                    while (line != null) {
+//                        buffer.append(line + "\n");
+//                        line = reader.readLine();
+//                    }
+//
+//                    // 데이터 파싱하기
+//                    String jsonString = buffer.toString();
+//                    JSONObject jsonObject = new JSONObject(jsonString);
+//                    JSONArray drinksArray = jsonObject.getJSONArray("drinks");
+//
+//                    for (int i = 0; i < drinksArray.length(); i++) {
+//                        JSONObject cocktail = drinksArray.getJSONObject(i);
+//                        String strDrink = cocktail.getString("strDrink");
+//                        String strImageSource = cocktail.getString("strImageSource");
+//                        String strInstructions = cocktail.getString("strInstructions");
+//                        String[] strIngredients = new String[15];
+//                        String[] strMeasures = new String[15];
+//
+//                        int index = 1;
+//                        while (true) { // strIngredients 채우기
+//                            String nextIngredient = cocktail.getString("strIngredient" + Integer.toString(index));
+//                            if (nextIngredient == null || index > 15) {
+//                                break;
+//                            }
+//                            strIngredients[index - 1] = nextIngredient;
+//                            index++;
+//                        }
+//                        while (true) { // strMeasures 채우기
+//                            String nextIngredient = cocktail.getString("strIngredient" + Integer.toString(index));
+//                            if (nextIngredient == null || index > 15) {
+//                                break;
+//                            }
+//                            strIngredients[index - 1] = nextIngredient;
+//                            index++;
+//                        }
+//
+//                        cocktails.add(new Cocktail(strDrink, strImageSource, strInstructions, strIngredients, strMeasures));
+//                        Log.d("cocktailSearchResult", String.valueOf(cocktails));
+//                        Toast toast2 = Toast.makeText(getContext(), "wpeosfsdaffsdfsdf", Toast.LENGTH_SHORT);
+//                        toast2.show();
+//                    }
+                }
+            });
+            return root;
+        }
+
+        @Override
+        public void onDestroyView () {
+            super.onDestroyView();
+            binding = null;
+        }
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-}

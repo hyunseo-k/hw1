@@ -7,6 +7,30 @@ public class Cocktail {
     public String[] strIngredients;
     public String[] strMeasures;
 
+    public Cocktail(String strDrink, String strImageSource, String strInstructions, String[] strIngredients, String[] strMeasures) {
+        this.strDrink = strDrink;
+        this.strImageSource = strImageSource;
+        this.strInstructions = strInstructions;
+        this.strIngredients = strIngredients;
+        this.strMeasures = strMeasures;
+    }
+
+    public String getStrDrink(){
+        return strDrink;
+    }
+    public String getStrImageSource(){
+        return strImageSource;
+    }
+    public String getStrInstructions(){
+        return strInstructions;
+    }
+    public String[] getStrIngredients(){
+        return strIngredients;
+    }
+    public String[] getStrMeasures(){
+        return strMeasures;
+    }
+
     public void setStrDrink(String strDrink){
         this.strDrink = strDrink;
     }

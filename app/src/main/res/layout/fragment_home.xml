@@ -10,9 +10,10 @@
         android:layout_marginTop="5dp"
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="430dp"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textView4"
         app:layout_constraintTop_toBottomOf="@id/searchView"
         tools:layout_editor_absoluteY="96dp">
 
@@ -22,11 +23,11 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="클릭 시 사용자 주소를 볼 수 있습니다."
+        android:text="클릭 시 상세 정보를 볼 수 있습니다."
         app:layout_constraintTop_toBottomOf="@id/listView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="34dp" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <SearchView
         android:id="@+id/searchView"

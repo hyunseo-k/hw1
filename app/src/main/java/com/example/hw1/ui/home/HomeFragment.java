@@ -1,5 +1,6 @@
 package com.example.hw1.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +12,11 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.hw1.DetailActivity;
 import com.example.hw1.Junbun;
 import com.example.hw1.ListViewAdapter;
 import com.example.hw1.R;
@@ -37,6 +41,14 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle("전화번호부");
+            }
+        }
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         listView = root.findViewById(R.id.listView);
@@ -44,12 +56,23 @@ public class HomeFragment extends Fragment {
 
         items = new ArrayList<>();
 
+
         final ArrayList<Junbun> filteredItems = new ArrayList<>(items);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(), items.get(i).address, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), filteredItems.get(i).address, Toast.LENGTH_SHORT).show();
+
+                Junbun selectedJunbun = filteredItems.get(i);
+
+                Intent intent = new Intent(requireContext(), DetailActivity.class);
+                intent.putExtra("name", selectedJunbun.getName());
+                intent.putExtra("number", selectedJunbun.getNumber());
+                intent.putExtra("address", selectedJunbun.getAddress());
+
+                // Start the DetailActivity
+                startActivity(intent);
             }
         });
 

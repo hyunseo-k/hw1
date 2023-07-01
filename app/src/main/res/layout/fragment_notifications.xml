@@ -17,11 +17,11 @@
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextText"
+        app:layout_constraintTop_toBottomOf="@id/cocktailSearch"
         tools:visibility="visible" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/cocktailImage"
         android:layout_width="154dp"
         android:layout_height="152dp"
         android:layout_marginTop="10dp"
@@ -41,7 +41,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/cocktailImage"
         tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -57,25 +57,25 @@
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/cocktailSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
         android:hint="Cocktail name"
-        app:layout_constraintEnd_toStartOf="@id/button3"
+        app:layout_constraintEnd_toStartOf="@id/buttonSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="search"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextText"
+        app:layout_constraintBottom_toBottomOf="@+id/cocktailSearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextText"
-        app:layout_constraintTop_toTopOf="@+id/editTextText" />
+        app:layout_constraintStart_toEndOf="@+id/cocktailSearch"
+        app:layout_constraintTop_toTopOf="@+id/cocktailSearch" />
 
     <Button
         android:id="@+id/buttonRandom"

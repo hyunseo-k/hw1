@@ -33,6 +33,10 @@ public class NotificationsFragment extends Fragment {
         Button buttonRandom = (Button) root.findViewById(R.id.buttonRandom);
 
 
+
+
+
+
         return root;
     }
 

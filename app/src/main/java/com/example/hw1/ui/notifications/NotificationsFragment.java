@@ -14,10 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.hw1.Cocktail;
+import com.example.hw1.Cocktail3;
 import com.example.hw1.R;
 import com.example.hw1.databinding.FragmentNotificationsBinding;
 import com.google.gson.Gson;
@@ -29,6 +32,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,6 +43,9 @@ import okhttp3.Response;
 public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
+    private RecyclerView mPostRecyclerView;
+    private CustomAdapter mAdapter;
+    private List<Cocktail3> mDatas;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +54,10 @@ public class NotificationsFragment extends Fragment {
         TextView cocktailTitle = (TextView) root.findViewById(R.id.cocktailTitle);
         ImageView cocktailImage = (ImageView) root.findViewById(R.id.cocktailImage);
         TextView cocktailMethod = (TextView) root.findViewById(R.id.cocktailMethod);
-        RecyclerView cocktailIngreds = (RecyclerView) root.findViewById(R.id.cocktailIngreds);
+
+        RecyclerView mPostRecyclerView = (RecyclerView) root.findViewById(R.id.cocktailIngreds);
+        mDatas = new ArrayList<>();
+
         EditText cocktailSearch = (EditText) root.findViewById(R.id.cocktailSearch);
         Button buttonSearch = (Button) root.findViewById(R.id.buttonSearch);
         Button buttonRandom = (Button) root.findViewById(R.id.buttonRandom);
@@ -61,6 +71,13 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent3);
             }
         });
+
+        DividerItemDecoration dividerDecoration = new DividerItemDecoration(requireContext(), new LinearLayoutManager(requireContext()).getOrientation());
+        mPostRecyclerView.addItemDecoration(dividerDecoration);
+
+        VerticalSpaceItemDecoration decoration_height = new VerticalSpaceItemDecoration(20);
+        mPostRecyclerView.addItemDecoration(decoration_height);
+
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,11 +175,29 @@ public class NotificationsFragment extends Fragment {
 
                                     // cocktailIngreds : RecyclerView
                                     if (resultCocktail.getStrIngredients().size() != 0) {
-                                        cocktailIngreds.setVisibility(View.VISIBLE);
+                                        mDatas.clear();
+                                        mPostRecyclerView.setVisibility(View.VISIBLE);
                                         // resultCocktail.getStrIngredients() -> String[] 타입으로 반환
                                         // resultCocktail.getStrMeasures() -> String[] 타입
-                                        Toast ingredsToast = Toast.makeText(getContext(), resultCocktail.getStrIngredients().toString() + resultCocktail.getStrMeasures().toString(), Toast.LENGTH_SHORT);
-                                        ingredsToast.show();
+//                                        Toast ingredsToast = Toast.makeText(getContext(), resultCocktail.getStrIngredients().toString() + resultCocktail.getStrMeasures().toString(), Toast.LENGTH_SHORT);
+//                                        ingredsToast.show();
+
+                                        for (int i = 0; i<resultCocktail.getStrIngredients().size(); i++){
+//                                            Log.d("mData", mDatas.toString());
+                                            if (resultCocktail.getStrMeasures().size()<=i){
+                                                mDatas.add(new Cocktail3(resultCocktail.getStrIngredients().get(i).toString(), " "));
+                                            }else{
+                                                mDatas.add(new Cocktail3(resultCocktail.getStrIngredients().get(i).toString(), resultCocktail.getStrMeasures().get(i).toString()));
+                                            }
+                                            Log.d("mData", mDatas.get(i).Ingred);
+                                            Log.d("mData1", mDatas.get(i).Measure);
+                                        }
+
+
+                                        CustomAdapter mAdpater = new CustomAdapter(mDatas);
+                                        mPostRecyclerView.setAdapter(mAdpater);
+                                        mPostRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
                                     }
 
 

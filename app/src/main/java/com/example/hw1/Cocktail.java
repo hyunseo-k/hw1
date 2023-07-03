@@ -136,9 +136,76 @@ public class Cocktail {
         result.add(strIngredient15);
 
         return result;
-
-
     }
+
+    public ArrayList<String> getStrMeasures() {
+        ArrayList<String> result = new ArrayList<String>();
+
+        if (strMeasure1 == null) {
+            return result;
+        }
+        result.add(strMeasure1);
+        if (strMeasure2 == null) {
+            return result;
+        }
+        result.add(strMeasure2);
+        if (strMeasure3 == null) {
+            return result;
+        }
+        result.add(strMeasure3);
+        if (strMeasure4 == null) {
+            return result;
+        }
+        result.add(strMeasure4);
+        if (strMeasure5 == null) {
+            return result;
+        }
+        result.add(strMeasure5);
+        if (strMeasure6 == null) {
+            return result;
+        }
+        result.add(strMeasure6);
+        if (strMeasure7 == null) {
+            return result;
+        }
+        result.add(strMeasure7);
+        if (strMeasure8 == null) {
+            return result;
+        }
+        result.add(strMeasure8);
+        if (strMeasure9 == null) {
+            return result;
+        }
+        result.add(strMeasure9);
+        if (strMeasure10 == null) {
+            return result;
+        }
+        result.add(strMeasure10);
+        if (strMeasure11 == null) {
+            return result;
+        }
+        result.add(strMeasure11);
+        if (strMeasure12 == null) {
+            return result;
+        }
+        result.add(strMeasure12);
+        if (strMeasure13 == null) {
+            return result;
+        }
+        result.add(strMeasure13);
+        if (strMeasure14 == null) {
+            return result;
+        }
+        result.add(strMeasure14);
+        if (strMeasure15 == null) {
+            return result;
+        }
+        result.add(strMeasure15);
+
+        return result;
+    }
+
+
 
     public void setStrDrink(String strDrink){
         this.strDrink = strDrink;

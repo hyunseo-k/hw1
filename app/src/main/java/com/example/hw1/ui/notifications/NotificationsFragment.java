@@ -156,12 +156,15 @@ public class NotificationsFragment extends Fragment {
                                     cocktailMethod.setVisibility(View.VISIBLE);
                                     cocktailMethod.setText(resultCocktail.getStrInstructions());
 
-                                    // cocktailIngreds
+                                    // cocktailIngreds : RecyclerView
                                     if (resultCocktail.getStrIngredients().size() != 0) {
                                         cocktailIngreds.setVisibility(View.VISIBLE);
-                                        Toast ingredsToast = Toast.makeText(getContext(), resultCocktail.getStrIngredients().toString(), Toast.LENGTH_SHORT);
+                                        // resultCocktail.getStrIngredients() -> String[] 타입으로 반환
+                                        // resultCocktail.getStrMeasures() -> String[] 타입
+                                        Toast ingredsToast = Toast.makeText(getContext(), resultCocktail.getStrIngredients().toString() + resultCocktail.getStrMeasures().toString(), Toast.LENGTH_SHORT);
                                         ingredsToast.show();
                                     }
+
 
 
                                 }

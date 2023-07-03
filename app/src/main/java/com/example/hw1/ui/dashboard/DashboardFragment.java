@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.hw1.R;
@@ -40,6 +42,14 @@ public class DashboardFragment extends Fragment {
 //        final TextView textView = binding.textDashboard;
 //        //dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 //        return root;
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (activity != null) {
+            ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle("갤러리");
+            }
+        }
+
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         listView = root.findViewById(R.id.gallary_list);

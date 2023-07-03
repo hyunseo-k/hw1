@@ -4,7 +4,13 @@
 
     <uses-feature
         android:name="android.hardware.telephony"
-        android:required="false" />
+        android:required="false" /> <!-- 전화와 메시지를 보내기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.DIAL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hw1"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.notifications.RecommendationActivity"
+            android:exported="false" />
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
@@ -29,11 +38,5 @@
             </intent-filter>
         </activity>
     </application>
-    <!--전화와 메시지를 보내기 위한 퍼미션-->
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.DIAL_PHONE" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

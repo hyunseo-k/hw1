@@ -1,5 +1,7 @@
 package com.example.hw1.ui.notifications;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hw1.DetailActivity;
 import com.example.hw1.R;
-import com.example.hw1.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,13 +33,16 @@ public class NotificationsFragment extends Fragment {
         Button buttonSearch = (Button) root.findViewById(R.id.buttonSearch);
         Button buttonRandom = (Button) root.findViewById(R.id.buttonRandom);
 
+        buttonRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(requireContext(), RecommendationActivity.class);
+                startActivity(intent3);
+            }
+        });
+
 
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
 }

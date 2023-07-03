@@ -1,5 +1,6 @@
 package com.example.hw1.ui.notifications;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +54,13 @@ public class NotificationsFragment extends Fragment {
 
         ArrayList<Cocktail> cocktails = new ArrayList<Cocktail>();
 
+        buttonRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(requireContext(), RecommendationActivity.class);
+                startActivity(intent3);
+            }
+        });
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override

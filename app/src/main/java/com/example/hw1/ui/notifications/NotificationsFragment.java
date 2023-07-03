@@ -225,14 +225,14 @@ public class NotificationsFragment extends Fragment {
 //                        Toast toast2 = Toast.makeText(getContext(), "wpeosfsdaffsdfsdf", Toast.LENGTH_SHORT);
 //                        toast2.show();
 //                    }
-                }
-            });
-            return root;
-        }
-
-        @Override
-        public void onDestroyView () {
-            super.onDestroyView();
-            binding = null;
-        }
+            }
+        });
+        return root;
     }
+
+    @Override
+    public void onDestroyView () {
+        super.onDestroyView();
+        binding = null;
+    }
+}

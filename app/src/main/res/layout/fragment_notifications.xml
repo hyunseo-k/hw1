@@ -72,6 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="search"
+        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/cocktailSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cocktailSearch"
@@ -82,12 +83,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop = "10dp"
-        android:backgroundTint="@color/teal_700"
         android:text="랜덤 칵테일 추천받기"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cocktailIngreds"
-        tools:layout_editor_absoluteX="223dp"
-        tools:layout_editor_absoluteY="703dp" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

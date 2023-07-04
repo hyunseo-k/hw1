@@ -16,8 +16,9 @@
 
         <ImageView
             android:id="@+id/gallary_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="120sp"
+            android:layout_height="120sp"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background"
             tools:srcCompat="@tools:sample/avatars"></ImageView>
 
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="14sp"
             tools:text="example"></TextView>
     </LinearLayout>
 

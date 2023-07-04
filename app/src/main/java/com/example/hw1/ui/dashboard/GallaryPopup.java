@@ -2,8 +2,6 @@ package com.example.hw1.ui.dashboard;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -33,10 +31,11 @@ public class GallaryPopup extends Activity {
         Intent intent = getIntent();
 
         imgName.setText(intent.getStringExtra("imgName"));
-        int imgId = intent.getIntExtra("imgView", R.drawable.person);
-        byte[] byteArray = getIntent().getByteArrayExtra("imgView");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        imgView.setImageBitmap(bitmap);
+//        int imgId = intent.getIntExtra("imgView", R.drawable.person);
+//        byte[] byteArray = getIntent().getByteArrayExtra("imgView");
+//        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+//        imgView.setImageBitmap(bitmap);
+        imgView.setImageResource(intent.getIntExtra("imgId", -1));
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override

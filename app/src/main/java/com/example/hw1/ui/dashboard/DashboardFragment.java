@@ -2,18 +2,13 @@ package com.example.hw1.ui.dashboard;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.GridView;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -31,14 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
-    private ListView listView;
+    private GridView gridView;
     private MyGallaryAdapter myGallaryAdapter;
     private ArrayList<MyData> dataList;
 
@@ -74,7 +68,7 @@ public class DashboardFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        listView = root.findViewById(R.id.gallary_list);
+        gridView = root.findViewById(R.id.gallary_list); // 이제 gridView 타입임.
 
         try {
             this.initializeData();
@@ -84,10 +78,12 @@ public class DashboardFragment extends Fragment {
 
 
         myGallaryAdapter = new MyGallaryAdapter(this.getContext(), dataList);
-        listView.setAdapter(myGallaryAdapter);
+        gridView.setAdapter(myGallaryAdapter);
 
-        // listView의 아이템 클릭 시 해당 사진을 확대하는 팝업을 띄운다.
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+        // gridView의 아이템 클릭 시 해당 사진을 확대하는 팝업을 띄운다.
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                Toast toast = Toast.makeText(getActivity(), "클릭되었습니다", Toast.LENGTH_SHORT);
@@ -95,18 +91,25 @@ public class DashboardFragment extends Fragment {
                 
                 // 팝업 액티비티 호출하기
 
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                Bitmap bitmap = ((BitmapDrawable) ((ImageView) view.findViewById(R.id.gallary_img)).getDrawable()).getBitmap();
-                float scale = (float) (1024/(float)bitmap.getWidth());
-                int image_w = (int) (bitmap.getWidth() * scale);
-                int image_h = (int) (bitmap.getHeight() * scale);
-                Bitmap resize = Bitmap.createScaledBitmap(bitmap, image_w, image_h, true);
-                resize.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                Bitmap bitmap = ((BitmapDrawable) ((ImageView) view.findViewById(R.id.gallary_img)).getDrawable()).getBitmap();
+//                float scale = (float) (1024/(float)bitmap.getWidth());
+//                int image_w = (int) (bitmap.getWidth() * scale);
+//                int image_h = (int) (bitmap.getHeight() * scale);
+//                Bitmap resize = Bitmap.createScaledBitmap(bitmap, image_w, image_h, true);
+//                resize.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//                byte[] byteArray = stream.toByteArray();
+
+                MyData myData = (MyData) adapterView.getItemAtPosition(i);
+                int imgId = myData.getId();
+                String imgName = myData.getText();
+
 
                 Intent intent = new Intent(getContext(), GallaryPopup.class);
-                intent.putExtra("imgName", ((TextView) view.findViewById(R.id.gallary_text)).getText()); // text를 넘긴다.
-                intent.putExtra("imgView", byteArray); // 이미지를 넘긴다.
+                //intent.putExtra("imgName", ((TextView) view.findViewById(R.id.gallary_text)).getText()); // text를 넘긴다.
+                // 뷰에서 가져오는 것보다 adapterView를 통해 i번째 item인 myData를 직접 가져오는 게 훨씬 나은 것 같다. 이미지 아이디 가져오기도 가능.
+                intent.putExtra("imgName", imgName);
+                intent.putExtra("imgId", imgId); // 이미지를 넘긴다.
                 startActivityResult.launch(intent);
 
                 
@@ -143,12 +146,16 @@ public class DashboardFragment extends Fragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                MyData myData = new MyData(null, null);
-                myData.setSrc(jsonObject.getString("src"));
-                myData.setText(jsonObject.getString("text"));
+                MyData myData = new MyData(
+                        jsonObject.getString("src"),
+                        jsonObject.getString("text"),
+                        getContext().getResources().getIdentifier(jsonObject.getString("src"), "drawable", getContext().getPackageName()));
+                //myData.setSrc(jsonObject.getString("src"));
+                //myData.setText(jsonObject.getString("text"));
+                //myData.setId(getContext().getResources().getIdentifier(myData.img_src, "drawable", getContext().getPackageName()));
                 dataList.add(myData);
             }
-            //listView.setAdapter(myGallaryAdapter);
+            //gridView.setAdapter(myGallaryAdapter);
         } catch (Exception e) {
             e.printStackTrace();
         }

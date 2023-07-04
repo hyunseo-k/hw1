@@ -16,7 +16,7 @@ public class DetailActivity extends AppCompatActivity {
     String name;
     String number;
     String address;
-    int index;
+    int id;
     Button button2;
     Button button;
 
@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         name = intent.getStringExtra("name");
         number = intent.getStringExtra("number");
         address = intent.getStringExtra("address");
-        index = intent.getIntExtra("index", 0);
+        id = intent.getIntExtra("id", 0);
         getSupportActionBar().setTitle(name+" Info");
 
         TextView nameText = findViewById(R.id.nameText);
@@ -49,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
                 intent.putExtra("name", name);
                 intent.putExtra("number", number);
                 intent.putExtra("address", address);
-                intent.putExtra("index", index);
+                intent.putExtra("id", id);
                 startActivityForResult(intent, TEST_TYPE);
             }
         });
@@ -82,13 +82,13 @@ public class DetailActivity extends AppCompatActivity {
                 String updatedName = data.getStringExtra("updatedName");
                 String updatedNumber = data.getStringExtra("updatedNumber");
                 String updatedAddress = data.getStringExtra("updatedAddress");
-                int updatedIndex = data.getIntExtra("updatedIndex", 0);
+                int updatedIndex = data.getIntExtra("updatedId", 0);
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("updatedName", updatedName);
                 resultIntent.putExtra("updatedNumber", updatedNumber);
                 resultIntent.putExtra("updatedAddress", updatedAddress);
-                resultIntent.putExtra("updatedIndex",updatedIndex);
+                resultIntent.putExtra("updatedId",updatedIndex);
                 setResult(RESULT_OK, resultIntent);
                 finish();
                 // Update the data in the list view or perform any necessary actions

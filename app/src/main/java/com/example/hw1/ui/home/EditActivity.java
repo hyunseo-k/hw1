@@ -19,10 +19,12 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        Log.d("idid", String.valueOf(getIntent().getIntExtra("id", -1)));
+
         String name = getIntent().getStringExtra("name");
         String number = getIntent().getStringExtra("number");
         String address = getIntent().getStringExtra("address");
-        int index = getIntent().getIntExtra("index", 0);
+        int id = getIntent().getIntExtra("id", -1);
 
 
         EditText editName = findViewById(R.id.editName);
@@ -40,12 +42,12 @@ public class EditActivity extends AppCompatActivity {
                 String nNumber = String.valueOf(editNumber.getText());
                 String nAddress = String.valueOf(editAddress.getText());
 
-                Log.d("index", String.valueOf(index));
+                Log.d("index", String.valueOf(id));
                 Intent intent = new Intent(EditActivity.this, DetailActivity.class);
                 intent.putExtra("updatedName", nName);
                 intent.putExtra("updatedNumber", nNumber);
                 intent.putExtra("updatedAddress", nAddress);
-                intent.putExtra("updatedIndex", index);
+                intent.putExtra("updatedId", id);
                 setResult(RESULT_OK, intent);
                 finish();
             }

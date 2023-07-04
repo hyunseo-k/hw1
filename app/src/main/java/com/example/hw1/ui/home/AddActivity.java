@@ -18,6 +18,8 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        int id = getIntent().getIntExtra("id", 0);
+
         getSupportActionBar().setTitle("전화번호 추가");
 
         EditText editName = (EditText) findViewById(R.id.editName);
@@ -34,8 +36,9 @@ public class AddActivity extends AppCompatActivity {
                 String newName = editName.getText().toString();
                 String newNumber = editNumber.getText().toString();
                 String newAddress = editAddress.getText().toString();
+                int newId = id;
 
-                Junbun junbun = new Junbun(newName, newNumber, newAddress);
+                Junbun junbun = new Junbun(newName, newNumber, newAddress, newId);
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("junbun", junbun);

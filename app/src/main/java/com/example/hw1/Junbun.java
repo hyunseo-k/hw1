@@ -1,9 +1,18 @@
 package com.example.hw1;
 
-public class Junbun {
+import java.io.Serializable;
+
+public class Junbun implements Serializable {
     public String name;
     public String number;
     public String address;
+
+    public Junbun(String name, String number, String address) {
+        this.name = name;
+        this.number = number;
+        this.address = address;
+    }
+
 
     public String getName(){
         return name;

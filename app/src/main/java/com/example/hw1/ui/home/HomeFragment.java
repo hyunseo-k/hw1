@@ -1,5 +1,7 @@
 package com.example.hw1.ui.home;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,14 +25,13 @@ import com.example.hw1.DetailActivity;
 import com.example.hw1.Junbun;
 import com.example.hw1.ListViewAdapter;
 import com.example.hw1.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -35,8 +39,68 @@ public class HomeFragment extends Fragment {
     private ListView listView;
     private ListViewAdapter listViewAdapter;
     private ArrayList<Junbun> items;
+    private FloatingActionButton fab;
+
+    private ArrayList<Junbun> filteredItems;
+
+    private static final int REQUEST_CODE_ADD_JUNBUN = 1;
+
+    private ActivityResultLauncher<Intent> addJunbunLauncher;
+    private ActivityResultLauncher<Intent> editJunbunLauncher;
+    private static final int TEST_TYPE = 1;
 
     SearchView searchView;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialize the activity result launcher
+        addJunbunLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null && data.hasExtra("junbun")) {
+                                Junbun junbun = (Junbun) data.getSerializableExtra("junbun");
+
+                                // Use the received Junbun object as needed
+                                Log.d("Received Junbun", junbun.getName() + ", " + junbun.getNumber() + ", " + junbun.getAddress());
+
+                                // Add the received Junbun to the list
+                                items.add(junbun);
+                                filterItems(searchView.getQuery().toString(), filteredItems);
+                                listViewAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
+
+        editJunbunLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == RESULT_OK) {
+                            // Retrieve the updated data from the result intent
+                            Intent data = result.getData();
+                            String updatedName = data.getStringExtra("updatedName");
+                            String updatedNumber = data.getStringExtra("updatedNumber");
+                            String updatedAddress = data.getStringExtra("updatedAddress");
+                            int updatedIndex = data.getIntExtra("updatedIndex", 0);
+                            // Update the data in the list view or perform any necessary actions
+                            // based on the updated data
+                            Junbun updatedJunbun = new Junbun(updatedName, updatedNumber, updatedAddress);
+
+                            filteredItems.set(updatedIndex, updatedJunbun);
+                            Log.d("updatedJunbun", String.valueOf(updatedJunbun.getName()));
+                            listViewAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+    }
+
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,11 +117,12 @@ public class HomeFragment extends Fragment {
 
         listView = root.findViewById(R.id.listView);
         searchView = root.findViewById(R.id.searchView);
+        fab = root.findViewById(R.id.fab);
 
         items = new ArrayList<>();
 
 
-        final ArrayList<Junbun> filteredItems = new ArrayList<>(items);
+        filteredItems = new ArrayList<>(items);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,11 +135,23 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("name", selectedJunbun.getName());
                 intent.putExtra("number", selectedJunbun.getNumber());
                 intent.putExtra("address", selectedJunbun.getAddress());
+                intent.putExtra("index", i);
 
                 // Start the DetailActivity
-                startActivity(intent);
+                editJunbunLauncher.launch(intent);
             }
         });
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), AddActivity.class);
+                addJunbunLauncher.launch(intent);
+
+            }
+        });
+
 
 
         listViewAdapter = new ListViewAdapter(filteredItems, requireContext());
@@ -103,10 +180,7 @@ public class HomeFragment extends Fragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                Junbun junbun = new Junbun();
-                junbun.setName(jsonObject.getString("name"));
-                junbun.setNumber(jsonObject.getString("number"));
-                junbun.setAddress(jsonObject.getString("address"));
+                Junbun junbun = new Junbun(jsonObject.getString("name"),jsonObject.getString("number"),jsonObject.getString("address") );
 
                 items.add(junbun);
 
@@ -117,6 +191,7 @@ public class HomeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -151,5 +226,7 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
+
 
 }

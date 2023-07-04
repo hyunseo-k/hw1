@@ -23,6 +23,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.AddActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.dashboard.GallaryPopup"
             android:exported="false" />
         <activity

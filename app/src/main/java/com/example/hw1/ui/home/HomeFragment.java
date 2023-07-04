@@ -89,9 +89,10 @@ public class HomeFragment extends Fragment {
                             int updatedIndex = data.getIntExtra("updatedIndex", 0);
                             // Update the data in the list view or perform any necessary actions
                             // based on the updated data
-                            Junbun updatedJunbun = new Junbun(updatedName, updatedNumber, updatedAddress);
+                            Junbun updatedJunbun = new Junbun(updatedName, updatedNumber, updatedAddress, updatedIndex);
 
-                            filteredItems.set(updatedIndex, updatedJunbun);
+                            items.set(updatedIndex, updatedJunbun);
+                            filterItems(searchView.getQuery().toString(), filteredItems);
                             Log.d("updatedJunbun", String.valueOf(updatedJunbun.getName()));
                             listViewAdapter.notifyDataSetChanged();
                         }
@@ -135,7 +136,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("name", selectedJunbun.getName());
                 intent.putExtra("number", selectedJunbun.getNumber());
                 intent.putExtra("address", selectedJunbun.getAddress());
-                intent.putExtra("index", i);
+                intent.putExtra("index", selectedJunbun.getId());
 
                 // Start the DetailActivity
                 editJunbunLauncher.launch(intent);
@@ -147,6 +148,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireActivity(), AddActivity.class);
+                intent.putExtra("id", items.size());
                 addJunbunLauncher.launch(intent);
 
             }
@@ -180,7 +182,7 @@ public class HomeFragment extends Fragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                Junbun junbun = new Junbun(jsonObject.getString("name"),jsonObject.getString("number"),jsonObject.getString("address") );
+                Junbun junbun = new Junbun(jsonObject.getString("name"),jsonObject.getString("number"),jsonObject.getString("address"), jsonObject.getInt("id"));
 
                 items.add(junbun);
 

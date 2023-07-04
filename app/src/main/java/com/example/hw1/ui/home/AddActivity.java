@@ -30,12 +30,13 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Toast t = Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT);
 //                t.show();
-
+                Intent intent = getIntent();
                 String newName = editName.getText().toString();
                 String newNumber = editNumber.getText().toString();
                 String newAddress = editAddress.getText().toString();
+                int newIndex = intent.getIntExtra("id", -1);
 
-                Junbun junbun = new Junbun(newName, newNumber, newAddress);
+                Junbun junbun = new Junbun(newName, newNumber, newAddress, newIndex);
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("junbun", junbun);

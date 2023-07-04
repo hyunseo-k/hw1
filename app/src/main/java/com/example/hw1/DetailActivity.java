@@ -90,7 +90,6 @@ public class DetailActivity extends AppCompatActivity {
                 resultIntent.putExtra("updatedAddress", updatedAddress);
                 resultIntent.putExtra("updatedIndex",updatedIndex);
                 setResult(RESULT_OK, resultIntent);
-                finish();
                 // Update the data in the list view or perform any necessary actions
                 // based on the updated data
             }

@@ -33,12 +33,16 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
 
     private ListView listView;
     private ListViewAdapter listViewAdapter;
-    private ArrayList<Junbun> items;
+
+    Map<Integer, Junbun> items = new HashMap<Integer, Junbun>();
+//    private ArrayList<Junbun> items;
     private FloatingActionButton fab;
 
     private ArrayList<Junbun> filteredItems;
@@ -119,8 +123,6 @@ public class HomeFragment extends Fragment {
         searchView = root.findViewById(R.id.searchView);
         fab = root.findViewById(R.id.fab);
 
-        items = new ArrayList<>();
-
 
         filteredItems = new ArrayList<>(items);
 
@@ -135,7 +137,6 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("name", selectedJunbun.getName());
                 intent.putExtra("number", selectedJunbun.getNumber());
                 intent.putExtra("address", selectedJunbun.getAddress());
-                intent.putExtra("index", i);
 
                 // Start the DetailActivity
                 editJunbunLauncher.launch(intent);

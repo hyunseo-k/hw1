@@ -1,10 +1,15 @@
-# 1분반 바텐더
+# 바텐더 넙죽
+<img src = "https://github.com/hyunseo-k/hw1/assets/79782180/9f03b20a-5696-4f6b-b879-59923ea7743a" width="30%" height = "30%" style="border-radius:50%" >
 
+<br>
 
 ## 개요
 
 2023 여름 몰입캠프 공통과제 1(2023.06.29. ~ 2023.07.05.)을 수행한 결과물입니다.
+<br>
 술을 사랑하는 몰입캠프 1분반 사람들의 즐거운 칵테일 생활을 도와주는 앱입니다!
+
+<br>
 
 ## Collaborators
 
@@ -12,6 +17,8 @@
 | :----: | :---------------------------------------------: | :---------------------: |
 | 강현서 |    [hyunseo-k](https://github.com/hyunseo-k)    | 성균관대 소프트웨어학과 |
 | 권진현 | [jinhyeonkwon](https://github.com/jinhyeonkwon) |    카이스트 전산학부    |
+
+<br>
 
 ## 기능 설명
 
@@ -24,6 +31,17 @@
 <img src="https://github.com/hyunseo-k/hw1/assets/79782180/f855105b-0a40-4795-9afd-afa3d0a08b1f" width="30%" height="30%"/>
 <img src="https://github.com/hyunseo-k/hw1/assets/79782180/c3c5e136-6979-433f-8e95-09d1e38cd207" width="30%" height="30%"/>
 <img src="https://github.com/hyunseo-k/hw1/assets/79782180/d5fbe44c-834c-453f-8b96-1c8b58286ec2" width="30%" height="30%"/>
+
+<br>
+
+- 각 번호 정보를 클릭하면 주소를 포함한 상세 정보를 조회할 수 있고, 사용자의 정보를 수정할 수 있습니다.
+
+<img src="https://github.com/hyunseo-k/hw1/assets/79782180/479003d6-5fcd-4dcf-8003-6e272b52d2e2" width="30%" height="30%"/>
+<img src="https://github.com/hyunseo-k/hw1/assets/79782180/cedf0a23-ee80-4074-a39a-bbc63de0f101" width="30%" height="30%"/>
+
+- 사용자의 이름으로 전화번호부를 필터링할 수 있습니다.
+
+<img src="https://github.com/hyunseo-k/hw1/assets/79782180/bd862114-9bb1-45fe-acd9-7905349e55de" width="30%" height="30%"/>
 
 ### 탭 2 : 갤러리
 

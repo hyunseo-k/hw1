@@ -1,5 +1,5 @@
 # 바텐더 넙죽
-<img src = "https://github.com/hyunseo-k/hw1/assets/79782180/9f03b20a-5696-4f6b-b879-59923ea7743a" width="30%" height = "30%" style="border-radius:50%" >
+<img src = "https://github.com/hyunseo-k/hw1/assets/79782180/1a49cd4c-ff71-41f2-8a96-d570675bb303" width="30%" height = "30%" style="border-radius:50%" >
 
 <br>
 

@@ -110,7 +110,8 @@ public class HomeFragment extends Fragment {
         if (activity != null) {
             ActionBar actionBar = activity.getSupportActionBar();
             if (actionBar != null) {
-                actionBar.setTitle("전화번호부");
+                actionBar.setIcon(R.drawable.bartendern);
+                //actionBar.setTitle("전화번호부");
             }
         }
 

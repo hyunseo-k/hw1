@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("전화번호부");
 
+        getSupportActionBar().setIcon(R.drawable.bartendern);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
